@@ -45,10 +45,7 @@ const LoginPage = () => {
     setIsLoading(true);
     try {
       const formData = form.getValues();
-      const response = await axios.post(
-        "http://34.228.16.50:8088/login-user",
-        formData
-      );
+      const response = await axios.post("/backend/login-user", formData);
       const response2 = await axios.post("/api/login", {
         email: formData.email,
       });
