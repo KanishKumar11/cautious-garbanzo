@@ -62,16 +62,19 @@ const Page = () => {
           waNumber,
           password,
         } = data;
-        const response = await axios.post("/backend/verify", {
-          first_name: firstName,
-          last_name: lastName,
-          user_country: country,
-          user_discord: discordUsername,
-          password,
-          otp: formData.otp,
-          waNumber,
-          email,
-        });
+        const response = await axios.post(
+          "https://outgoing-grizzly-in.ngrok-free.app/verify",
+          {
+            first_name: firstName,
+            last_name: lastName,
+            user_country: country,
+            user_discord: discordUsername,
+            password,
+            otp: formData.otp,
+            waNumber,
+            email,
+          }
+        );
         toast.success("Email verified successfully");
         console.log(response);
         router.push("/dashboard");

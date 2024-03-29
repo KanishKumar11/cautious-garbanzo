@@ -71,15 +71,18 @@ const Page = () => {
       const formData = form.getValues();
       saveFormDataToSessionStorage(formData);
 
-      const response = await axios.post("/backend/register", {
-        email: formData.email,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        user_country: formData.country,
-        user_discord: formData.discordUsername,
-        password: formData.password,
-        waNumber: formData.waNumber,
-      });
+      const response = await axios.post(
+        "https://outgoing-grizzly-in.ngrok-free.app/register",
+        {
+          email: formData.email,
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          user_country: formData.country,
+          user_discord: formData.discordUsername,
+          password: formData.password,
+          waNumber: formData.waNumber,
+        }
+      );
       setIsLoading(false);
       console.log(response);
       toast.dismiss();

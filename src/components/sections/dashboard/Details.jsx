@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
+import useGlobalStore from "@/store/store";
 const formSchema = z.object({
   botName: z.string().min(2, {
     message: "Bot name must be at least 2 characters.",
@@ -46,12 +47,18 @@ const Details = () => {
     try {
       const formData = form.getValues();
 
-      const response = await axios.post("/backend/detail", {
-        bot_name: formData.botName,
-        company_name: formData.companyName,
-        contact_name: formData.contactName,
-        email: email.data.email,
-      });
+      // const { apiUrl } = useGlobalStore();
+      // console.log("api", apiUrl);
+
+      const response = await axios.post(
+        "https://outgoing-grizzly-in.ngrok-free.app/detail",
+        {
+          bot_name: formData.botName,
+          company_name: formData.companyName,
+          contact_name: formData.contactName,
+          email: email.data.email,
+        }
+      );
       console.log(response);
       toast.dismiss();
       toast.success("Details saved!.");

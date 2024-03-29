@@ -54,7 +54,7 @@ const ResetPasswordPage = ({ searchParams }) => {
       const formData = form.getValues();
       // Extract the token from query params
       const response = await axios.post(
-        "/backend/password-reset-update-password",
+        "https://outgoing-grizzly-in.ngrok-free.app/password-reset-update-password",
         { email: Email(), password: formData.password }
       );
       setIsLoading(false);

@@ -39,7 +39,7 @@ const PresetItem = [
 const ManualTest = () => {
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl flex items-center justify-center flex-col gap-1">
-      <h2 className="text-2xl font-bold text-center my-4">Manual Test</h2>
+      <h2 className="text-2xl font-bold text-center my-4">Manual Input</h2>
       <p>New User Message:</p>
       <Input />
       <Button>Send Instruction + Message</Button>

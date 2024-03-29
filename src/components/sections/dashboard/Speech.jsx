@@ -32,7 +32,7 @@ const speechItem = [
 const Speech = () => {
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl">
-      <h2 className="text-2xl font-bold text-center my-4">Speech</h2>
+      <h2 className="text-2xl font-bold text-center my-4">Pre Prompt</h2>
       <div className="flex flex-wrap gap-3">
         {speechItem.map((item, index) => (
           <Button key={index} className="min-w-[33%] flex-grow">

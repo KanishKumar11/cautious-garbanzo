@@ -51,7 +51,7 @@ const ForgotPasswordPage = () => {
     try {
       const formData = form.getValues();
       const response = await axios.post(
-        "/backend/password-reset-initiate",
+        "https://outgoing-grizzly-in.ngrok-free.app/password-reset-initiate",
         formData
       );
       setIsLoading(false);

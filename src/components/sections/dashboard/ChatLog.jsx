@@ -22,8 +22,10 @@ const callLogs = [
 const ChatLog = () => {
   const [callLogs, setCallLogs] = useState([]);
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
+  const SOCKET_URL = "wss://73dd7c55933092a55c4796a715d7fe14.serveo.net/ws";
+  console.log(SOCKET_URL);
   useEffect(() => {
-    const ws = new WebSocket(`ws://34.228.16.50:8080/ws/chatroom/96gjggj3/`);
+    const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);
 
     ws.onopen = () => {
       console.log("Connected to WebSocket");
