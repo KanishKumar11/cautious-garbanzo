@@ -56,8 +56,9 @@ const Details = () => {
         {
           bot_name: formData.botName,
           company_name: formData.companyName,
-          contact_name: formData.contactName,
-          email: email.data.email,
+          // contact_name: formData.contactName,
+          customer_name: formData.contactName,
+          // email: email.data.email,
         }
       );
       console.log(response);
