@@ -22,7 +22,7 @@ const callLogs = [
 const ChatLog = () => {
   const [callLogs, setCallLogs] = useState([]);
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
-  const SOCKET_URL = "wss://73dd7c55933092a55c4796a715d7fe14.serveo.net/ws";
+  const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
   console.log(SOCKET_URL);
   useEffect(() => {
     const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);

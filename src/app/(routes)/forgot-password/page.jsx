@@ -23,6 +23,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import useGlobalStore from "@/store/store";
 
 const formSchema = z.object({
   email: z
@@ -36,6 +37,7 @@ const formSchema = z.object({
 });
 
 const ForgotPasswordPage = () => {
+  const { otp, setOtp } = useGlobalStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -51,10 +53,11 @@ const ForgotPasswordPage = () => {
     try {
       const formData = form.getValues();
       const response = await axios.post(
-        "https://outgoing-grizzly-in.ngrok-free.app/password-reset-initiate",
+        "http://127.0.0.1:8000/password-reset-initiate",
         formData
       );
       setIsLoading(false);
+      setOtp(response.data.otp);
       toast.success("An email with otp to reset your password has been sent.");
       setIsEmailVerified(true);
       console.log(response);
@@ -69,8 +72,9 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
     try {
       const formData = form.getValues();
+      if (formData.otp == otp) console.log("otp verified");
       const response = await axios.post(
-        "/backend/password-reset-verify-otp",
+        "https://outgoing-grizzly-in.ngrok-free.app/password-reset-verify-otp",
         formData
       );
       setIsLoading(false);

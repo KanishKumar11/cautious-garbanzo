@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: "/backend/:path*",
-        destination: `${API_URL}/:path*`,
+        destination: `http://127.0.0.1:8000/:path*`,
       },
       // {
       //   source: "/socket/:path*",

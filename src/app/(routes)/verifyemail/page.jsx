@@ -23,6 +23,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import Footer from "@/components/Footer";
+import useGlobalStore from "@/store/store";
 
 const FormSchema = z.object({
   otp: z.string().min(6, {
@@ -31,6 +32,8 @@ const FormSchema = z.object({
 });
 
 const Page = () => {
+  const { otp } = useGlobalStore();
+  console.log(otp);
   const [data, setData] = useState(null);
   const router = useRouter();
   const form = useForm({
@@ -52,6 +55,7 @@ const Page = () => {
     const formData = form.getValues();
     console.log(formData.otp, typeof formData.otp);
     try {
+      if (otp != formData.otp) throw new Error("Invalid Otp");
       if (data) {
         const {
           email,
@@ -65,12 +69,12 @@ const Page = () => {
         const response = await axios.post(
           "https://outgoing-grizzly-in.ngrok-free.app/verify",
           {
+            // otp: formData.otp,
             first_name: firstName,
             last_name: lastName,
             user_country: country,
             user_discord: discordUsername,
             password,
-            otp: formData.otp,
             waNumber,
             email,
           }

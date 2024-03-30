@@ -17,6 +17,7 @@ import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
+import useGlobalStore from "@/store/store";
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -62,6 +63,7 @@ const Page = () => {
   const saveFormDataToSessionStorage = (formData) => {
     sessionStorage.setItem("signupFormData", JSON.stringify(formData));
   };
+  const { setOtp } = useGlobalStore();
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -69,7 +71,6 @@ const Page = () => {
 
     try {
       const formData = form.getValues();
-      saveFormDataToSessionStorage(formData);
 
       const response = await axios.post(
         "https://outgoing-grizzly-in.ngrok-free.app/register",
@@ -83,6 +84,9 @@ const Page = () => {
           waNumber: formData.waNumber,
         }
       );
+      saveFormDataToSessionStorage(formData);
+
+      setOtp(response.data.otp);
       setIsLoading(false);
       console.log(response);
       toast.dismiss();
