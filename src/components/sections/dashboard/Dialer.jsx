@@ -26,6 +26,7 @@ const Dialer = () => {
     toast.loading("dialing...");
     try {
       const email = await axios.get("/api/email");
+      console.log(email.data.email);
       const response = await axios.post(
         "https://outgoing-grizzly-in.ngrok-free.app/call",
         {

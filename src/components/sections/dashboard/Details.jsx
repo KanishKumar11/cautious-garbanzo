@@ -51,7 +51,8 @@ const Details = () => {
       // console.log("api", apiUrl);
 
       const response = await axios.post(
-        "https://outgoing-grizzly-in.ngrok-free.app/detail",
+        "https://outgoing-grizzly-in.ngrok-free.app/update",
+        // "https://outgoing-grizzly-in.ngrok-free.app/detail",
         {
           bot_name: formData.botName,
           company_name: formData.companyName,
