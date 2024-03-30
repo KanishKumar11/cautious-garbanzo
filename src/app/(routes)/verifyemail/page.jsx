@@ -69,7 +69,7 @@ const Page = () => {
         const response = await axios.post(
           "https://outgoing-grizzly-in.ngrok-free.app/verify",
           {
-            // otp: formData.otp,
+            otp: formData.otp,
             first_name: firstName,
             last_name: lastName,
             user_country: country,
