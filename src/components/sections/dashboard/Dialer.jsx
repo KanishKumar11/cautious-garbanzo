@@ -5,8 +5,12 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { TbBackspaceFilled } from "react-icons/tb";
 import { FaPhoneAlt } from "react-icons/fa";
+// import dialerSound from "./../../../../public/dial.mp3";
+import Head from "next/head";
 
 const Dialer = () => {
+  // const [audio] = useState(new Audio(dialerSound));
+
   const [num, setNum] = useState("");
 
   const handleInputChange = (e) => {
@@ -15,6 +19,8 @@ const Dialer = () => {
 
   const handleButtonClick = (value) => {
     setNum(num + value);
+    const audio = new Audio("/dial.mp3");
+    audio.play();
   };
   const onSubmit = async () => {
     toast.loading("dialing...");
@@ -37,6 +43,9 @@ const Dialer = () => {
 
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl">
+      <Head>
+        <audio src="/dial.mp3" id="dialerSound" preload="auto" />
+      </Head>
       <h2 className="text-2xl font-bold text-center my-4">Dailer</h2>
       <div className="flex items-center gap-3">
         <Input type="text" value={num} onChange={handleInputChange} />
