@@ -28,9 +28,9 @@ const ChatLog = () => {
   const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
   console.log(SOCKET_URL);
   useEffect(() => {
-    const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);
-
+    
     if (callStatus) {
+      const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);
       ws.onopen = () => {
         console.log("Connected to WebSocket");
         ws.send(JSON.stringify(mess)); // Send a message to the server
