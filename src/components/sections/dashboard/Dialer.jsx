@@ -7,10 +7,11 @@ import { TbBackspaceFilled } from "react-icons/tb";
 import { FaPhoneAlt } from "react-icons/fa";
 // import dialerSound from "./../../../../public/dial.mp3";
 import Head from "next/head";
+import useGlobalStore from "@/store/store";
 
 const Dialer = () => {
   // const [audio] = useState(new Audio(dialerSound));
-
+  const { setCallStatus } = useGlobalStore();
   const [num, setNum] = useState("");
 
   const handleInputChange = (e) => {
@@ -34,6 +35,7 @@ const Dialer = () => {
           email: email.data.email,
         }
       );
+      setCallStatus(true);
       toast.dismiss();
       console.log(response.data);
     } catch (err) {

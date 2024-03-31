@@ -5,6 +5,7 @@ import React, { useRef, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useEffect } from "react";
+import useGlobalStore from "@/store/store";
 const callLogs = [
   { user: "I am user", agent: "I am agent" },
   { user: "I am user", agent: "I am also agent" },
@@ -20,6 +21,8 @@ const callLogs = [
   { user: "I am user", agent: "I am also agent" },
 ];
 const ChatLog = () => {
+  const { callStatus } = useGlobalStore();
+  console.log(callStatus);
   const [callLogs, setCallLogs] = useState([]);
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
   const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
@@ -27,31 +30,38 @@ const ChatLog = () => {
   useEffect(() => {
     const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);
 
-    ws.onopen = () => {
-      console.log("Connected to WebSocket");
-      ws.send(JSON.stringify(mess)); // Send a message to the server
-    };
+    if (callStatus) {
+      ws.onopen = () => {
+        console.log("Connected to WebSocket");
+        ws.send(JSON.stringify(mess)); // Send a message to the server
+      };
 
-    ws.onmessage = (event) => {
-      console.log(JSON.parse(event.data));
-      setCallLogs((prevLogs) => [...prevLogs, JSON.parse(event.data)]);
-    };
-    ws.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
+      ws.onmessage = (event) => {
+        console.log(JSON.parse(event.data));
+        setCallLogs((prevLogs) => [...prevLogs, JSON.parse(event.data)]);
+      };
+      ws.onclose = () => {
+        console.log("WebSocket connection closed");
+      };
 
-    ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
+      ws.onerror = (error) => {
+        console.error("WebSocket error:", error);
+      };
 
-    return () => {
-      ws.close();
-    };
-  }, []);
+      return () => {
+        ws.close();
+      };
+    }
+  }, [callStatus]);
   console.log(callLogs);
 
   return (
-    <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl max-h-[500px] ">
+    <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl max-h-[500px] relative ">
+      <div
+        className={`absolute h-4 w-4 right-4 top-4 ${
+          callStatus ? "bg-green-400" : "bg-red-600"
+        } rounded-full`}
+      />
       <h2 className="text-2xl font-bold text-center my-4">Call Log</h2>
       <div className="flex gap-4 h-auto">
         <div className="min-w-[65%] flex gap-2 flex-col overflow-y-auto no-scrollbar max-h-[400px]">
