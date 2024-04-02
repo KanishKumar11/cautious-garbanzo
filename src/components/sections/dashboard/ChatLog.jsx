@@ -29,7 +29,8 @@ const ChatLog = () => {
   const messageRef = useRef(null);
 
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
-  const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
+  // const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
+  const SOCKET_URL = "wss://d319ce8abc95e60843672430541db6bf.serveo.net/ws";
   console.log(SOCKET_URL);
   useEffect(() => {
     if (callStatus) {
