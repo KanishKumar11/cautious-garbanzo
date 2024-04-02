@@ -7,7 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useEffect } from "react";
 import useGlobalStore from "@/store/store";
 const callLogs = [
-  { user: "I am user", agent: "I am agent" },
+  { user: "I am user", agent: "I am agent1" },
   { user: "I am user", agent: "I am also agent" },
   { user: "I am user", agent: "I am agent" },
   { user: "I am user", agent: "I am also agent" },
@@ -18,17 +18,20 @@ const callLogs = [
   { user: "I am user", agent: "I am agent" },
   { user: "I am user", agent: "I am also agent" },
   { user: "I am user", agent: "I am agent" },
-  { user: "I am user", agent: "I am also agent" },
+  { user: "I am user", agent: "I am also agent lasr" },
+  { user: "I am user", agent: "I am also agent lasr" },
+  { user: "I am user", agent: "I am also agent lasr" },
 ];
 const ChatLog = () => {
   const { callStatus } = useGlobalStore();
   console.log(callStatus);
   const [callLogs, setCallLogs] = useState([]);
+  const messageRef = useRef(null);
+
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
   const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
   console.log(SOCKET_URL);
   useEffect(() => {
-    
     if (callStatus) {
       const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);
       ws.onopen = () => {
@@ -38,6 +41,11 @@ const ChatLog = () => {
 
       ws.onmessage = (event) => {
         console.log(JSON.parse(event.data));
+        // for (let i = 0; i < event.data.length; i++) {
+        //   // Parse each string element into a JSON object
+        //   event.data[i] = JSON.parse(event.data[i]);
+        // }
+        console.log(event);
         setCallLogs((prevLogs) => [...prevLogs, JSON.parse(event.data)]);
       };
       ws.onclose = () => {
@@ -54,6 +62,12 @@ const ChatLog = () => {
     }
   }, [callStatus]);
   console.log(callLogs);
+  useEffect(() => {
+    // Scroll to the latest message when callLogs changes
+    if (messageRef.current) {
+      messageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [callLogs]);
 
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl max-h-[500px] relative ">
@@ -64,24 +78,24 @@ const ChatLog = () => {
       />
       <h2 className="text-2xl font-bold text-center my-4">Call Log</h2>
       <div className="flex gap-4 h-auto">
-        <div className="min-w-[65%] flex gap-2 flex-col overflow-y-auto no-scrollbar max-h-[400px]">
+        <div className="min-w-[65%] flex gap-2 flex-col-reverse overflow-y-auto no-scrollbar max-h-[400px]">
           {callLogs.length > 0 ? (
             <>
               {callLogs.map((item, index) => (
-                <>
+                <React.Fragment key={index}>
                   <div
-                    key={index}
+                    ref={index === callLogs.length - 1 ? messageRef : null}
                     className="w-[80%]  py-3 px-5 max-w-max rounded-md bg-zinc-50"
                   >
                     {item.user}
                   </div>
                   <div
-                    key={index}
+                    ref={index === callLogs.length - 1 ? messageRef : null}
                     className="w-[80%] self-end text-right max-w-max  py-3 px-5 rounded-md bg-zinc-50"
                   >
                     {item.agent}
                   </div>
-                </>
+                </React.Fragment>
               ))}
             </>
           ) : (
