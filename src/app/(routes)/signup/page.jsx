@@ -71,19 +71,17 @@ const Page = () => {
 
     try {
       const formData = form.getValues();
+      const backend = process.env.NEXT_PUBLIC_API_URL;
 
-      const response = await axios.post(
-        "https://outgoing-grizzly-in.ngrok-free.app/register",
-        {
-          email: formData.email,
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          user_country: formData.country,
-          user_discord: formData.discordUsername,
-          password: formData.password,
-          waNumber: formData.waNumber,
-        }
-      );
+      const response = await axios.post(`${backend}/register`, {
+        email: formData.email,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        user_country: formData.country,
+        user_discord: formData.discordUsername,
+        password: formData.password,
+        waNumber: formData.waNumber,
+      });
       saveFormDataToSessionStorage(formData);
 
       setOtp(response.data.otp);

@@ -30,11 +30,11 @@ const ChatLog = () => {
 
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
   // const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
-  const SOCKET_URL = "wss://d319ce8abc95e60843672430541db6bf.serveo.net/ws";
+  const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
   console.log(SOCKET_URL);
   useEffect(() => {
     if (callStatus) {
-      const ws = new WebSocket(`${SOCKET_URL}/chatroom/96gjggj3/`);
+      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/96gjggj3/`);
       ws.onopen = () => {
         console.log("Connected to WebSocket");
         ws.send(JSON.stringify(mess)); // Send a message to the server

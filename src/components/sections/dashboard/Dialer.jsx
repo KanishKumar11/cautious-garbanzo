@@ -27,14 +27,13 @@ const Dialer = () => {
     toast.loading("dialing...");
     try {
       const email = await axios.get("/api/email");
+      const backend = process.env.NEXT_PUBLIC_API_URL;
+      console.log(backend);
       console.log(email.data.email);
-      const response = await axios.post(
-        "https://outgoing-grizzly-in.ngrok-free.app/call",
-        {
-          phone_number: num,
-          email: email.data.email,
-        }
-      );
+      const response = await axios.post(`${backend}/call`, {
+        phone_number: num,
+        email: email.data.email,
+      });
       setCallStatus(true);
       toast.dismiss();
       console.log(response.data);

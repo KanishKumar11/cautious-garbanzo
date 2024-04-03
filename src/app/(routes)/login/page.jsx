@@ -45,10 +45,9 @@ const LoginPage = () => {
     setIsLoading(true);
     try {
       const formData = form.getValues();
-      const response = await axios.post(
-        "https://outgoing-grizzly-in.ngrok-free.app/login-user",
-        formData
-      );
+      const backend = process.env.NEXT_PUBLIC_API_URL;
+
+      const response = await axios.post(`${backend}/login-user`, formData);
       const response2 = await axios.post("/api/login", {
         email: formData.email,
       });

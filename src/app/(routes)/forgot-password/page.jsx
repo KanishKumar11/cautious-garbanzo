@@ -73,8 +73,10 @@ const ForgotPasswordPage = () => {
     try {
       const formData = form.getValues();
       if (formData.otp == otp) console.log("otp verified");
+      const backend = process.env.NEXT_PUBLIC_API_URL;
+
       const response = await axios.post(
-        "https://outgoing-grizzly-in.ngrok-free.app/password-reset-verify-otp",
+        `${backend}/password-reset-verify-otp`,
         formData
       );
       setIsLoading(false);
