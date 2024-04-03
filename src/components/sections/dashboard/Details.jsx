@@ -83,7 +83,7 @@ const Details = () => {
               <FormItem>
                 <FormLabel>Bot Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Maria" {...field} />
+                  <Input placeholder="Harley" {...field} />
                 </FormControl>
 
                 <FormMessage />

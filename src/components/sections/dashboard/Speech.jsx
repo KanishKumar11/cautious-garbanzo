@@ -5,33 +5,33 @@ const speechItem = [
     name: "Say bot-patience",
   },
   {
-    name: "Say maria patience",
+    name: "Say Harley patience",
   },
   {
-    name: "Say maria-card",
+    name: "Say Harley-card",
   },
   {
-    name: "Say maria-great",
+    name: "Say Harley-great",
   },
   {
-    name: "Say maria-HERC",
+    name: "Say Harley-HERC",
   },
   {
-    name: "Say maria-okay",
+    name: "Say Harley-okay",
   },
   {
     name: "Loop cartoon-pops",
   },
   {
-    name: "Say maria-chirps",
+    name: "Say Harley-chirps",
   },
   {
-    name: "Say maria-bells",
+    name: "Say Harley-bells",
   },
 ];
 const Speech = () => {
   return (
-    <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl">
+    <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl h-full">
       <h2 className="text-2xl font-bold text-center my-4">Pre Prompt</h2>
       <div className="flex flex-wrap gap-3">
         {speechItem.map((item, index) => (

@@ -71,7 +71,7 @@ const ChatLog = () => {
   }, [callLogs]);
 
   return (
-    <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl max-h-[500px] relative ">
+    <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl max-h-[500px] relative h-full">
       <div
         className={`absolute h-4 w-4 right-4 top-4 ${
           callStatus ? "bg-green-400" : "bg-red-600"
