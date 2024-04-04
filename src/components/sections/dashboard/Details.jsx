@@ -39,6 +39,7 @@ const Details = () => {
       contactName: "",
     },
   });
+  const { setBotName } = useGlobalStore();
 
   const onSubmit = async () => {
     toast.loading("Saving...");
@@ -62,6 +63,7 @@ const Details = () => {
           // email: email.data.email,
         }
       );
+      setBotName(formData.botName);
       console.log(response);
       toast.dismiss();
       toast.success("Details saved!.");
@@ -84,7 +86,7 @@ const Details = () => {
               <FormItem>
                 <FormLabel>Bot Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Harley" {...field} />
+                  <Input placeholder="" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -99,7 +101,7 @@ const Details = () => {
               <FormItem className="mt-2">
                 <FormLabel>Company Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Example Company" {...field} />
+                  <Input placeholder="" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -111,9 +113,9 @@ const Details = () => {
             name="contactName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Contact Name</FormLabel>
+                <FormLabel>Client Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input placeholder="" {...field} />
                 </FormControl>
 
                 <FormMessage />

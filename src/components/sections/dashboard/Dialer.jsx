@@ -34,6 +34,7 @@ const Dialer = () => {
         phone_number: num,
         email: email.data.email,
       });
+      toast.success("Call connected");
       setCallStatus(true);
       toast.dismiss();
       console.log(response.data);
