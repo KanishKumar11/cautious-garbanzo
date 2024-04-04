@@ -34,6 +34,7 @@ const Speech = () => {
       const backend = process.env.NEXT_PUBLIC_API_URL;
       const response = axios.post(`${backend}/pre-prompt`, { index });
       console.log(response);
+      console.log(index);
     } catch (err) {
       toast.error(err);
     }
@@ -43,7 +44,11 @@ const Speech = () => {
       <h2 className="text-2xl font-bold text-center my-4">Pre Prompt</h2>
       <div className="flex flex-wrap gap-3">
         {speechItem.map((item, index) => (
-          <Button key={index} className="min-w-[33%] flex-grow">
+          <Button
+            key={index}
+            className="min-w-[33%] flex-grow"
+            onClick={() => handleSubmit(index)}
+          >
             {item.name}
           </Button>
         ))}
