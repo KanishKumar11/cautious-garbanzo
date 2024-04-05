@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import useGlobalStore from "@/store/store";
 import axios from "axios";
+import Head from "next/head";
 import React from "react";
 
 const Speech = () => {
@@ -41,13 +42,20 @@ const Speech = () => {
   };
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl h-full">
+      <Head>
+        <audio src="/dial.mp3" id="dialerSound" preload="auto" />
+      </Head>
       <h2 className="text-2xl font-bold text-center my-4">Pre Prompt</h2>
       <div className="flex flex-wrap gap-3">
         {speechItem.map((item, index) => (
           <Button
             key={index}
             className="min-w-[33%] flex-grow"
-            onClick={() => handleSubmit(index)}
+            onClick={() => {
+              handleSubmit(index);
+              const audio = new Audio(`/${index}.mp3`);
+              audio.play();
+            }}
           >
             {item.name}
           </Button>
