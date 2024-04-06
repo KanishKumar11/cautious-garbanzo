@@ -42,10 +42,7 @@ const ChatLog = () => {
 
       ws.onmessage = (event) => {
         console.log(JSON.parse(event.data));
-        // for (let i = 0; i < event.data.length; i++) {
-        //   // Parse each string element into a JSON object
-        //   event.data[i] = JSON.parse(event.data[i]);
-        // }
+
         console.log(event);
         setCallLogs((prevLogs) => [...prevLogs, JSON.parse(event.data)]);
       };
@@ -84,18 +81,22 @@ const ChatLog = () => {
             <>
               {callLogs.map((item, index) => (
                 <React.Fragment key={index}>
-                  <div
-                    ref={index === callLogs.length - 1 ? messageRef : null}
-                    className="w-[80%]  py-3 px-5 max-w-max rounded-md bg-zinc-50"
-                  >
-                    {item.user}
-                  </div>
-                  <div
-                    ref={index === callLogs.length - 1 ? messageRef : null}
-                    className="w-[80%] self-end text-right max-w-max  py-3 px-5 rounded-md bg-zinc-50"
-                  >
-                    {item.agent}
-                  </div>
+                  {item.user && (
+                    <div
+                      ref={index === callLogs.length - 1 ? messageRef : null}
+                      className="w-[80%]  py-3 px-5 max-w-max rounded-md bg-zinc-50"
+                    >
+                      {item.user}
+                    </div>
+                  )}
+                  {item.agent && (
+                    <div
+                      ref={index === callLogs.length - 1 ? messageRef : null}
+                      className="w-[80%] self-end text-right max-w-max  py-3 px-5 rounded-md bg-zinc-50"
+                    >
+                      {item.agent}
+                    </div>
+                  )}
                 </React.Fragment>
               ))}
             </>
