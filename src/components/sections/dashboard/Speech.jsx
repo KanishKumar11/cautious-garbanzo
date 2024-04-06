@@ -30,10 +30,10 @@ const Speech = () => {
       name: `Say ${botName} bells`,
     },
   ];
-  const handleSubmit = (index) => {
+  const handleSubmit = async (index) => {
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;
-      const response = axios.post(`${backend}/pre-prompt`, { index });
+      const response = await axios.post(`${backend}/pre-prompt`, { index });
       console.log(response);
       console.log(index);
     } catch (err) {

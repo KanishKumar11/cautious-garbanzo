@@ -39,6 +39,7 @@ const Dialer = () => {
       toast.dismiss();
       console.log(response.data);
     } catch (err) {
+      toast.dismiss();
       toast.error("Unable to make the call, Try again!");
       console.log(err);
     }
