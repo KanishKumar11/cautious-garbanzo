@@ -53,8 +53,8 @@ const Speech = () => {
             className="min-w-[33%] flex-grow"
             onClick={() => {
               handleSubmit(index);
-              const audio = new Audio(`/${index}.mp3`);
-              audio.play();
+              // const audio = new Audio(`/${index}.mp3`);
+              // audio.play();
             }}
           >
             {item.name}
