@@ -17,9 +17,9 @@ const Speech = () => {
     {
       name: `Say ${botName} great`,
     },
-    {
-      name: `Say ${botName} HERC`,
-    },
+    // {
+    //   name: `Say ${botName} HERC`,
+    // },
     {
       name: `Say ${botName} okay`,
     },

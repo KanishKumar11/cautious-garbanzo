@@ -36,7 +36,7 @@ const Transcription = () => {
             formData,
           });
           console.log(response);
-          setTranscription(response?.data?.transcription);
+          // setTranscription(response?.data?.transcription);
           toast.dismiss();
           toast.success("Submitted");
           audioUrlRef.current = data.audioUrl; // Save the audio URL
