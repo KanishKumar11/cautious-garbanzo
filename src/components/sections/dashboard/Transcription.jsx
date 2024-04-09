@@ -32,9 +32,13 @@ const Transcription = () => {
         try {
           toast.loading("Processing...");
           const backend = process.env.NEXT_PUBLIC_API_URL;
-          const response = await axios.post(`${backend}/transcription`, {
+          const response = await axios.post(
+            `${backend}/transcription`,
             formData,
-          });
+            {
+              "Content-Type": "multipart/form-data",
+            }
+          );
           console.log(response);
           // setTranscription(response?.data?.transcription);
           toast.dismiss();
