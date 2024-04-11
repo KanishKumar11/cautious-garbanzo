@@ -59,7 +59,7 @@ const Details = () => {
           company_name: formData.companyName,
           // contact_name: formData.contactName,
           customer_name: formData.contactName,
-          prompt,
+          prompt: formData.prompt,
           // email: email.data.email,
         }
       );
