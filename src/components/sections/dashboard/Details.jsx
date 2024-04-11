@@ -28,6 +28,7 @@ const formSchema = z.object({
   contactName: z.string().min(2, {
     message: "Contact Name must be at least 2 characters.",
   }),
+  prompt: z.string().optional(),
 });
 
 const Details = () => {
@@ -37,6 +38,7 @@ const Details = () => {
       botName: "",
       companyName: "",
       contactName: "",
+      prompt: "",
     },
   });
   const { setBotName } = useGlobalStore();
