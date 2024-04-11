@@ -20,35 +20,34 @@ const Transcription = () => {
       });
       mediaRecorderRef.current = new MediaRecorder(audioStreamRef.current);
 
-      mediaRecorderRef.current.ondataavailable = (e) => {
-        audioChunksRef.current.push(e.data);
-      };
-
-      mediaRecorderRef.current.onstop = async () => {
-        const blob = new Blob(audioChunksRef.current, { type: "audio/wav" });
-        const formData = new FormData();
-        formData.append("audio", blob);
-
-        try {
-          toast.loading("Processing...");
-          const backend = process.env.NEXT_PUBLIC_API_URL;
-          const response = await axios.post(
-            `${backend}/transcription`,
-            formData,
-            {
-              "Content-Type": "multipart/form-data",
-            }
+      mediaRecorderRef.current.ondataavailable = async (e) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const audioArrayBuffer = reader.result;
+          const audioContext = new AudioContext();
+          const audioBuffer = await audioContext.decodeAudioData(
+            audioArrayBuffer
           );
-          console.log(response);
-          // setTranscription(response?.data?.transcription);
-          toast.dismiss();
-          toast.success("Submitted");
-          audioUrlRef.current = data.audioUrl; // Save the audio URL
-        } catch (error) {
-          toast.dismiss();
-          toast.error("An error occurred, try again");
-          console.error("Error:", error);
-        }
+          const audioSource = audioContext.createBufferSource();
+          audioSource.buffer = audioBuffer;
+
+          const recognition = new webkitSpeechRecognition(); // Initialize Web Speech API
+          recognition.lang = "en-US"; // Set language (change if needed)
+          recognition.interimResults = true; // Get interim results
+          recognition.onresult = (event) => {
+            const result = event.results[event.results.length - 1];
+            if (result.isFinal) {
+              setTranscription(
+                (prevTranscription) =>
+                  prevTranscription + result[0].transcript + " "
+              );
+            }
+          };
+          recognition.start();
+          audioSource.connect(audioContext.destination);
+          audioSource.start();
+        };
+        reader.readAsArrayBuffer(e.data);
       };
 
       mediaRecorderRef.current.start();

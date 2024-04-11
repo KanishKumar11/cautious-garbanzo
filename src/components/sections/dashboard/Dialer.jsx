@@ -37,7 +37,7 @@ const Dialer = () => {
       toast.success("Call connected");
       setCallStatus(true);
       toast.dismiss();
-      console.log(response.data);
+      console.log(response);
     } catch (err) {
       toast.dismiss();
       toast.error("Unable to make the call, Try again!");

@@ -49,9 +49,6 @@ const Details = () => {
       const formData = form.getValues();
       const backend = process.env.NEXT_PUBLIC_API_URL;
 
-      // const { apiUrl } = useGlobalStore();
-      // console.log("api", apiUrl);
-
       const response = await axios.post(
         `${backend}/update`,
         // "https://outgoing-grizzly-in.ngrok-free.app/detail",
@@ -60,6 +57,7 @@ const Details = () => {
           company_name: formData.companyName,
           // contact_name: formData.contactName,
           customer_name: formData.contactName,
+          prompt,
           // email: email.data.email,
         }
       );
@@ -114,6 +112,20 @@ const Details = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Client Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="prompt"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Initial Prompt</FormLabel>
                 <FormControl>
                   <Input placeholder="" {...field} />
                 </FormControl>
