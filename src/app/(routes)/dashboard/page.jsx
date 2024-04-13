@@ -98,7 +98,10 @@ const Page = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer">
                 <AlertDialog>
-                  <AlertDialogTrigger onClick={handleLogoutClick}>
+                  <AlertDialogTrigger
+                    onClick={handleLogoutClick}
+                    className="w-full"
+                  >
                     Logout
                   </AlertDialogTrigger>
                   <AlertDialogContent>
