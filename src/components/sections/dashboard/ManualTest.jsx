@@ -103,7 +103,11 @@ const ManualTest = () => {
       console.log(manualInput);
       console.log(response);
       toast.dismiss();
-      toast.success("Mode Changed!");
+      if (!manualInput) {
+        toast.success("Manual mode ON");
+      } else {
+        toast.success("Manual mode OFF");
+      }
     } catch (Err) {
       console.log("Error");
       toast.dismiss();

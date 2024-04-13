@@ -5,6 +5,7 @@ import React, { useRef, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useEffect } from "react";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import useGlobalStore from "@/store/store";
 const callLogs = [
   { user: "I am user", agent: "I am agent1" },
@@ -82,7 +83,7 @@ const ChatLog = () => {
       />
       <h2 className="text-2xl font-bold text-center my-4">Call Log</h2>
       <div className="flex gap-4 h-[85%]">
-        <div className="min-w-[65%] flex gap-2 flex-col-reverse overflow-y-auto no-scrollbar max-h-[400px]">
+        <div className="w-full flex gap-2 flex-col-reverse overflow-y-auto no-scrollbar max-h-[400px]">
           {callLogs.length > 0 ? (
             <>
               {callLogs.map((item, index) => (
@@ -92,7 +93,7 @@ const ChatLog = () => {
                       ref={index === callLogs.length - 1 ? messageRef : null}
                       className="w-[80%]  py-3 px-5 max-w-max rounded-md bg-zinc-50"
                     >
-                      {item.user}
+                      User:{item.user}
                     </div>
                   )}
                   {item.agent && (
@@ -100,7 +101,7 @@ const ChatLog = () => {
                       ref={index === callLogs.length - 1 ? messageRef : null}
                       className="w-[80%] self-end text-right max-w-max  py-3 px-5 rounded-md bg-zinc-50"
                     >
-                      {item.agent}
+                      Bot:{item.agent}
                     </div>
                   )}
                 </React.Fragment>
@@ -112,7 +113,7 @@ const ChatLog = () => {
             </div>
           )}
         </div>
-        <div className="flex gap-2 flex-col min-w-[30%]">
+        {/* <div className="flex gap-2 flex-col min-w-[30%]">
           <Button
             className="flex-wrap text-wrap h-auto max-w-[90%] whitespace-normal"
             onClick={copyBotResponse}
@@ -127,6 +128,14 @@ const ChatLog = () => {
           >
             Forget Everything
           </Button>
+        </div> */}
+        <div
+          className="absolute top-10 text-2xl right-4 cursor-pointer"
+          onClick={() => {
+            setCallLogs([]);
+          }}
+        >
+          <RiDeleteBin5Fill />
         </div>
       </div>
     </div>
