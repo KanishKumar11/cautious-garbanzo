@@ -5,8 +5,10 @@ import useGlobalStore from "@/store/store";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { Switch } from "@/components/ui/switch";
 
 const ManualTest = () => {
+  const [manualInput, setManualInput] = useState(false);
   const [manual_response, setManual_response] = useState("");
   const [run_instructions, setRun_instructions] = useState("");
   const { botName } = useGlobalStore();
@@ -84,7 +86,14 @@ const ManualTest = () => {
   };
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl flex items-center justify-center flex-col gap-1">
-      <h2 className="text-2xl font-bold text-center my-4">Manual Input</h2>
+      <div className="flex items-center gap-3">
+        <h2 className="text-2xl font-bold text-center my-4">Manual Input</h2>
+        <Switch
+          className="bg-red-100"
+          checked={manualInput}
+          onCheckedChange={setManualInput}
+        />
+      </div>
       <p>New User Message:</p>
       <Input
         value={manual_response}

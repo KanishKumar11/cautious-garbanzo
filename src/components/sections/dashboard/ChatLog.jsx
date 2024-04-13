@@ -66,6 +66,12 @@ const ChatLog = () => {
       messageRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [callLogs]);
+  const copyBotResponse = () => {
+    const latestAgentMessage = callLogs.filter((item) => item.agent).pop();
+    if (latestAgentMessage) {
+      navigator.clipboard.writeText(latestAgentMessage.agent);
+    }
+  };
 
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl max-h-[500px] relative h-full">
@@ -75,7 +81,7 @@ const ChatLog = () => {
         } rounded-full`}
       />
       <h2 className="text-2xl font-bold text-center my-4">Call Log</h2>
-      <div className="flex gap-4 h-auto">
+      <div className="flex gap-4 h-[85%]">
         <div className="min-w-[65%] flex gap-2 flex-col-reverse overflow-y-auto no-scrollbar max-h-[400px]">
           {callLogs.length > 0 ? (
             <>
@@ -107,27 +113,20 @@ const ChatLog = () => {
           )}
         </div>
         <div className="flex gap-2 flex-col min-w-[30%]">
-          <Button>Copy Bot Response</Button>
-          <Button>Forget Everything</Button>
-          <div>Settings</div>
-          <div className="flex items-center justify-center gap-1">
-            <Checkbox />
-            Enable Auto Transfer
-          </div>
-          <div className="w-full rounded-md border border-zinc-500 py-2 flex items-center justify-center">
-            gpt-3.5-turbo
-          </div>
-          <RadioGroup defaultValue="UnrealSpeech">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="ElevenLabs" id="ElevenLabs" />
-              <Label htmlFor="ElevenLabs">ElevenLabs</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="UnrealSpeech" id="UnrealSpeech" />
-              <Label htmlFor="UnrealSpeech">UnrealSpeech</Label>
-            </div>
-          </RadioGroup>
-          <Button>Save Settings</Button>
+          <Button
+            className="flex-wrap text-wrap h-auto max-w-[90%] whitespace-normal"
+            onClick={copyBotResponse}
+          >
+            Copy Bot Response
+          </Button>
+          <Button
+            className="flex-wrap text-wrap h-auto max-w-[90%] whitespace-normal"
+            onClick={() => {
+              setCallLogs([]);
+            }}
+          >
+            Forget Everything
+          </Button>
         </div>
       </div>
     </div>

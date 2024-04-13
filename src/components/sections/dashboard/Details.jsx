@@ -18,27 +18,32 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 import useGlobalStore from "@/store/store";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 const formSchema = z.object({
-  botName: z.string().min(2, {
-    message: "Bot name must be at least 2 characters.",
-  }),
-  companyName: z.string().min(2, {
-    message: "Company must be at least 2 characters.",
-  }),
-  contactName: z.string().min(2, {
-    message: "Contact Name must be at least 2 characters.",
-  }),
+  // botName: z.string().min(2, {
+  //   message: "Bot name must be at least 2 characters.",
+  // }),
+  // companyName: z.string().min(2, {
+  //   message: "Company must be at least 2 characters.",
+  // }),
+  // contactName: z.string().min(2, {
+  //   message: "Contact Name must be at least 2 characters.",
+  // }),
   prompt: z.string().optional(),
+  service: z.string().optional(),
 });
 
 const Details = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      botName: "",
-      companyName: "",
-      contactName: "",
+      // botName: "",
+      // companyName: "",
+      // contactName: "",
       prompt: "",
+      service: "",
     },
   });
   const { setBotName } = useGlobalStore();
@@ -55,14 +60,16 @@ const Details = () => {
         `${backend}/update`,
         // "https://outgoing-grizzly-in.ngrok-free.app/detail",
         {
-          bot_name: formData.botName,
-          company_name: formData.companyName,
-          // contact_name: formData.contactName,
-          customer_name: formData.contactName,
+          // bot_name: formData.botName,
+          // company_name: formData.companyName,
+          // // contact_name: formData.contactName,
+          // customer_name: formData.contactName,
           prompt: formData.prompt,
+          service: formData.service,
           // email: email.data.email,
         }
       );
+      console.log(formData);
       setBotName(formData.botName);
       console.log(response);
       toast.dismiss();
@@ -78,7 +85,7 @@ const Details = () => {
       <h2 className="text-2xl font-bold text-center my-4">Basic Details</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-          <FormField
+          {/* <FormField
             control={form.control}
             name="botName"
             className="mt-2"
@@ -121,7 +128,7 @@ const Details = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
           <FormField
             control={form.control}
             name="prompt"
@@ -129,13 +136,52 @@ const Details = () => {
               <FormItem>
                 <FormLabel>Initial Prompt</FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Textarea className="h-full" {...field} />
                 </FormControl>
 
                 <FormMessage />
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="service"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Voice service</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue="ElevenLabs"
+                    className="flex flex-col space-y-1"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="Twilio" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Twilio </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="ElevenLabs" />
+                      </FormControl>
+                      <FormLabel className="font-normal">ElevenLabs </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="UnrealSpeech" />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        UnrealSpeech
+                      </FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <Button type="submit" className="w-full">
             Save Settings
           </Button>

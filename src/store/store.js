@@ -9,6 +9,8 @@ const useGlobalStore = create((set) => ({
   setCallStatus: (value) => set({ callStatus: value }),
   botName: "bot",
   setBotName: (value) => set({ botName: value }),
+  user: {},
+  setUser: (value) => set({ user: value }),
 }));
 
 export default useGlobalStore;

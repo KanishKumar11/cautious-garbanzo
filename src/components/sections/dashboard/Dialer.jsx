@@ -8,6 +8,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 // import dialerSound from "./../../../../public/dial.mp3";
 import Head from "next/head";
 import useGlobalStore from "@/store/store";
+import { MdCallEnd } from "react-icons/md";
 
 const Dialer = () => {
   // const [audio] = useState(new Audio(dialerSound));
@@ -58,6 +59,12 @@ const Dialer = () => {
           onClick={() => onSubmit()}
         >
           <FaPhoneAlt />
+        </div>
+        <div
+          className=" w-max p-2 cursor-pointer text-slate-100 rounded-xl bg-red-500 px-3 font-bold"
+          // onClick={() => onSubmit()}
+        >
+          <MdCallEnd />
         </div>
       </div>
       <div className="flex flex-col mt-4">

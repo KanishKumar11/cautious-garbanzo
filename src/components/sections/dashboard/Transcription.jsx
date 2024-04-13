@@ -31,8 +31,8 @@ const Transcription = () => {
           const audioSource = audioContext.createBufferSource();
           audioSource.buffer = audioBuffer;
 
-          const recognition = new webkitSpeechRecognition(); // Initialize Web Speech API
-          recognition.lang = "en-US"; // Set language (change if needed)
+          const recognition = new webkitSpeechRecognition();
+          recognition.lang = "en-US";
           recognition.interimResults = true; // Get interim results
           recognition.onresult = (event) => {
             const result = event.results[event.results.length - 1];
