@@ -93,12 +93,14 @@ const ManualTest = () => {
       } else {
         toast.loading("Switing to AI mode...");
       }
-      setManual_response(!manualInput);
+
+      // manualInput ? setManual_response(false) : setManual_response(true);
       const backend = process.env.NEXT_PUBLIC_API_URL;
 
       const response = await axios.post(`${backend}/toggle`, {
-        mode: manualInput,
+        mode: !manualInput,
       });
+      console.log(manualInput);
       console.log(response);
       toast.dismiss();
       toast.success("Mode Changed!");
@@ -115,7 +117,8 @@ const ManualTest = () => {
         <Switch
           className="bg-red-100"
           checked={manualInput}
-          onCheckedChange={handleInputChange}
+          onCheckedChange={setManualInput}
+          onClick={handleInputChange}
         />
       </div>
       <p>New User Message:</p>

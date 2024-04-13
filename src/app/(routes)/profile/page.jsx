@@ -77,7 +77,7 @@ const Page = () => {
       waNumber: "",
     },
   });
-  const { user, setUser, userEmail } = useGlobalStore();
+  const { user, setUser, userEmail, setUserEmail } = useGlobalStore();
   form.setValue("firstName", user.first_name);
   form.setValue("lastName", user.last_name);
   form.setValue("email", user.email);
@@ -100,12 +100,11 @@ const Page = () => {
     }
   };
   useEffect(() => {
-    useEffect(() => {
-      console.log(localStorage.getItem("userEmail"));
-      setUserEmail(localStorage.getItem("userEmail"));
-    }, []);
+    console.log(localStorage.getItem("userEmail"));
+    setUserEmail(localStorage.getItem("userEmail"));
     fetchUserDetails();
   }, []);
+
   const onSubmit = async () => {
     setIsLoading(true);
     toast.loading("Updating...");
@@ -122,19 +121,16 @@ const Page = () => {
         user_discord: formData.discordUsername,
         waNumber: formData.waNumber,
       });
-      saveFormDataToSessionStorage(formData);
 
-      setOtp(response.data.otp);
       setIsLoading(false);
       console.log(response);
       toast.dismiss();
-      toast.success("Registration successful. Please login.");
-      router.push("/verifyemail");
+      toast.success("Update successful.");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
       toast.dismiss();
-      toast.error("Failed to register. Please try again.");
+      toast.error("Failed to Update. Please try again.");
     }
   };
   const handleLogoutClick = (e) => {
