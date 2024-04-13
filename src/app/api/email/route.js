@@ -1,3 +1,4 @@
+"use server";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
