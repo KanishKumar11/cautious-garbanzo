@@ -77,7 +77,7 @@ const Page = () => {
       waNumber: "",
     },
   });
-  const { user, setUser } = useGlobalStore();
+  const { user, setUser, userEmail } = useGlobalStore();
   form.setValue("firstName", user.first_name);
   form.setValue("lastName", user.last_name);
   form.setValue("email", user.email);
@@ -90,7 +90,7 @@ const Page = () => {
       const email = await axios.get("/api/email");
       console.log(email.data.email);
       const response = await axios.post(`${backend}/get_user_details`, {
-        email: email.data.email,
+        email: userEmail,
       });
       setUser(response.data.user);
 

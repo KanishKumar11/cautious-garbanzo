@@ -11,6 +11,8 @@ const useGlobalStore = create((set) => ({
   setBotName: (value) => set({ botName: value }),
   user: {},
   setUser: (value) => set({ user: value }),
+  userEmail: "",
+  setUserEmail: (value) => set({ userEmail: value }),
 }));
 
 export default useGlobalStore;

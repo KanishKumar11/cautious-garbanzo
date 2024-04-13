@@ -35,18 +35,26 @@ import Link from "next/link";
 import getEmail from "@/helpers/getEmail";
 
 const Page = () => {
+  const { user, setUser, userEmail, setUserEmail } = useGlobalStore();
+
   const [email, setEmail] = useState("");
 
   const getAndSetEmail = async () => {
-    const tokenEmail = await getEmail();
-    setEmail(tokenEmail);
+    // const tokenEmail = await getEmail();
+    const response = await axios.get("/api/email");
+    console.log(response);
+    console.log(response.data.email);
+    const tokenEmail = response.data.email;
+    console.log(tokenEmail);
+    await setEmail(tokenEmail);
+    await setUserEmail(tokenEmail);
+    console.log(userEmail);
     console.log(email);
   };
-  getAndSetEmail();
   useEffect(() => {
+    getAndSetEmail();
     fetchUserDetails();
-  }, [email]);
-  const { user, setUser } = useGlobalStore();
+  }, [email, userEmail]);
   const router = useRouter();
   const handleLogoutClick = (e) => {
     e.stopPropagation();
@@ -76,7 +84,7 @@ const Page = () => {
       // console.log(email);
       console.log(email);
       const response = await axios.post(`${backend}/get_user_details`, {
-        email: email,
+        email: userEmail,
       });
       setUser(response.data.user);
 

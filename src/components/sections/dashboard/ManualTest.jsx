@@ -12,6 +12,7 @@ const ManualTest = () => {
   const [manual_response, setManual_response] = useState("");
   const [run_instructions, setRun_instructions] = useState("");
   const { botName } = useGlobalStore();
+  console.log(manualInput);
   const PresetItem = [
     // {
     //   name: "Dynamic Tags Test",
@@ -84,6 +85,25 @@ const ManualTest = () => {
     }
     console.log(manual_response, run_instructions);
   };
+  console.log(manualInput);
+  const handleInputChange = async () => {
+    try {
+      if (manualInput) {
+        toast.loading("Switing to manual mode...");
+      } else {
+        toast.loading("Switing to AI mode...");
+      }
+      setManual_response(!manualInput);
+      const response = await axios.post("", { manualInput });
+      console.log(response);
+      toast.dismiss();
+      toast.success("Mode Changed!");
+    } catch (Err) {
+      console.log("Error");
+      toast.dismiss();
+      toast.error("Unable to change mode");
+    }
+  };
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl flex items-center justify-center flex-col gap-1">
       <div className="flex items-center gap-3">
@@ -91,7 +111,7 @@ const ManualTest = () => {
         <Switch
           className="bg-red-100"
           checked={manualInput}
-          onCheckedChange={setManualInput}
+          onCheckedChange={handleInputChange}
         />
       </div>
       <p>New User Message:</p>

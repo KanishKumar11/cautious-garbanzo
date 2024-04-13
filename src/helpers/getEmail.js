@@ -1,15 +1,16 @@
+"use server";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+
 const getEmail = async () => {
   try {
-    const response = await fetch("/api/email");
+    const cookieStore = cookies();
 
-    const data = await response.json();
-
-    if (!data || !data.decodedToken || !data.decodedToken.email) {
-      throw new Error("Email not found in response");
-    }
-    console.log(data);
-    console.log(data.decodedToken.email);
-    return data.decodedToken.email;
+    const token = cookieStore.get("token");
+    const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
+    console.log("hello");
+    console.log(decodedToken);
+    return token;
   } catch (error) {
     console.error("Error fetching email:", error);
     throw error;
