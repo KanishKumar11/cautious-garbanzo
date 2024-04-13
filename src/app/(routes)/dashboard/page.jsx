@@ -52,9 +52,10 @@ const Page = () => {
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;
       const email = await axios.get("/api/email");
-      console.log(email.data.email);
+      console.log(email);
+      console.log(email.data.decodedToken.email);
       const response = await axios.post(`${backend}/get_user_details`, {
-        email: email.data.email,
+        email: email.data.decodedToken.email,
       });
       setUser(response.data.user);
 
