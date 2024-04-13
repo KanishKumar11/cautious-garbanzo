@@ -5,7 +5,7 @@ import Dialer from "@/components/sections/dashboard/Dialer";
 import ManualTest from "@/components/sections/dashboard/ManualTest";
 import Speech from "@/components/sections/dashboard/Speech";
 import Transcription from "@/components/sections/dashboard/Transcription";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import {
   DropdownMenu,
@@ -32,8 +32,20 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import useGlobalStore from "@/store/store";
 import Link from "next/link";
+import getEmail from "@/helpers/getEmail";
 
 const Page = () => {
+  const [email, setEmail] = useState("");
+
+  const getAndSetEmail = async () => {
+    const tokenEmail = await getEmail();
+    setEmail(tokenEmail);
+    console.log(email);
+  };
+  getAndSetEmail();
+  useEffect(() => {
+    fetchUserDetails();
+  }, [email]);
   const { user, setUser } = useGlobalStore();
   const router = useRouter();
   const handleLogoutClick = (e) => {
@@ -48,14 +60,23 @@ const Page = () => {
       console.log(err);
     }
   };
+  // const getEmail = async () => {
+  //   // "use server";
+  //   try {
+  //     const email = await axios.get("/api/email");
+  //     setEmail(email);
+  //     return email;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const fetchUserDetails = async () => {
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;
-      const email = await axios.get("/api/email");
+      // console.log(email);
       console.log(email);
-      console.log(email.data.decodedToken.email);
       const response = await axios.post(`${backend}/get_user_details`, {
-        email: email.data.decodedToken.email,
+        email: email,
       });
       setUser(response.data.user);
 
@@ -64,9 +85,7 @@ const Page = () => {
       console.log(err);
     }
   };
-  useEffect(() => {
-    fetchUserDetails();
-  }, []);
+
   return (
     <div className="flex justify-start items-center h-full min-h-screen relative bg-blue-500/50 backdrop-blur-md  backdrop-sepia p-7 gap-8 flex-col w-full">
       <Toaster />
