@@ -1,3 +1,4 @@
+"use server";
 const getEmail = async () => {
   try {
     const response = await fetch("/api/email");
