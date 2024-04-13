@@ -78,6 +78,10 @@ const Page = () => {
   //     console.log(err);
   //   }
   // };
+  useEffect(() => {
+    console.log(localStorage.getItem("userEmail"));
+    setUserEmail(localStorage.getItem("userEmail"));
+  }, []);
   const fetchUserDetails = async () => {
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;

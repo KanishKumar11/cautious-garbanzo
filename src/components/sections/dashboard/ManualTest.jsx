@@ -94,7 +94,11 @@ const ManualTest = () => {
         toast.loading("Switing to AI mode...");
       }
       setManual_response(!manualInput);
-      const response = await axios.post("", { manualInput });
+      const backend = process.env.NEXT_PUBLIC_API_URL;
+
+      const response = await axios.post(`${backend}/toggle`, {
+        mode: manualInput,
+      });
       console.log(response);
       toast.dismiss();
       toast.success("Mode Changed!");

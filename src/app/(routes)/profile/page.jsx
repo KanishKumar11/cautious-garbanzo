@@ -100,6 +100,10 @@ const Page = () => {
     }
   };
   useEffect(() => {
+    useEffect(() => {
+      console.log(localStorage.getItem("userEmail"));
+      setUserEmail(localStorage.getItem("userEmail"));
+    }, []);
     fetchUserDetails();
   }, []);
   const onSubmit = async () => {

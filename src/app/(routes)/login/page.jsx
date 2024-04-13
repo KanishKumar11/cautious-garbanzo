@@ -52,6 +52,8 @@ const LoginPage = () => {
         email: formData.email,
       });
       setIsLoading(false);
+      localStorage.setItem("userEmail", formData.email);
+
       toast.success("Login successful.");
       console.log(response);
       console.log(response2);
