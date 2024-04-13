@@ -112,6 +112,11 @@ const ManualTest = () => {
   };
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl flex items-center justify-center flex-col gap-1">
+      <div
+        className={`absolute h-4 w-4 right-4 top-4 ${
+          manualInput ? "bg-green-400" : "bg-red-600"
+        } rounded-full`}
+      />
       <div className="flex items-center gap-3">
         <h2 className="text-2xl font-bold text-center my-4">Manual Input</h2>
         <Switch
