@@ -152,7 +152,7 @@ const Details = () => {
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue="ElevenLabs"
+                    defaultValue="Male"
                     className="flex flex-col space-y-1"
                   >
                     {/* <FormItem className="flex items-center space-x-3 space-y-0">
@@ -163,17 +163,15 @@ const Details = () => {
                     </FormItem> */}
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="ElevenLabs" />
+                        <RadioGroupItem value="Male" />
                       </FormControl>
-                      <FormLabel className="font-normal">ElevenLabs </FormLabel>
+                      <FormLabel className="font-normal">Male </FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="UnrealSpeech" disabled />
+                        <RadioGroupItem value="Female" disabled />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        UnrealSpeech
-                      </FormLabel>
+                      <FormLabel className="font-normal">Female</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
