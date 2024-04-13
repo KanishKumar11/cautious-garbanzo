@@ -112,6 +112,7 @@ const ManualTest = () => {
       console.log("Error");
       toast.dismiss();
       toast.error("Unable to change mode");
+      setManualInput(manualInput);
     }
   };
   return (
@@ -135,7 +136,9 @@ const ManualTest = () => {
         value={manual_response}
         onChange={(e) => setManual_response(e.target.value)}
       />
-      <Button onClick={handleSubmit}>Send Instruction + Message</Button>
+      <Button onClick={handleSubmit} disabled={!manualInput}>
+        Send Instruction + Message
+      </Button>
       <p>New Run Instructions:</p>
       <Input
         value={run_instructions}
@@ -147,6 +150,7 @@ const ManualTest = () => {
           <Button
             key={index}
             className="flex-grow"
+            disabled={!manualInput}
             onClick={() => {
               setRun_instructions(item.value);
             }}

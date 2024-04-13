@@ -155,12 +155,12 @@ const Details = () => {
                     defaultValue="ElevenLabs"
                     className="flex flex-col space-y-1"
                   >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
+                    {/* <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="Twilio" />
+                        <RadioGroupItem value="Twilio" disabled />
                       </FormControl>
                       <FormLabel className="font-normal">Twilio </FormLabel>
-                    </FormItem>
+                    </FormItem> */}
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="ElevenLabs" />
@@ -169,7 +169,7 @@ const Details = () => {
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="UnrealSpeech" />
+                        <RadioGroupItem value="UnrealSpeech" disabled />
                       </FormControl>
                       <FormLabel className="font-normal">
                         UnrealSpeech
