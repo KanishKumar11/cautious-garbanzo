@@ -51,7 +51,7 @@ const Dialer = () => {
       <Head>
         <audio src="/dial.mp3" id="dialerSound" preload="auto" />
       </Head>
-      <h2 className="text-2xl font-bold text-center my-4">Dailer</h2>
+      <h2 className="text-2xl font-bold text-center my-4">Dialer</h2>
       <div className="flex items-center gap-3">
         <Input type="text" value={num} onChange={handleInputChange} />
         <div
