@@ -169,7 +169,7 @@ const Details = () => {
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="Female" disabled />
+                        <RadioGroupItem value="Female" />
                       </FormControl>
                       <FormLabel className="font-normal">Female</FormLabel>
                     </FormItem>
