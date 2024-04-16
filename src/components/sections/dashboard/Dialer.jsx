@@ -12,7 +12,7 @@ import { MdCallEnd } from "react-icons/md";
 
 const Dialer = () => {
   // const [audio] = useState(new Audio(dialerSound));
-  const { setCallStatus, callStatus } = useGlobalStore();
+  const { setCallStatus, callStatus, setRoomCode } = useGlobalStore();
   const [num, setNum] = useState("");
 
   const handleInputChange = (e) => {
@@ -26,6 +26,17 @@ const Dialer = () => {
   };
   const onSubmit = async () => {
     toast.loading("dialing...");
+    function generateRoomCode(length) {
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      return result;
+    }
+    const roomCode = generateRoomCode(16);
     try {
       const email = await axios.get("/api/email");
       const backend = process.env.NEXT_PUBLIC_API_URL;
@@ -34,7 +45,9 @@ const Dialer = () => {
       const response = await axios.post(`${backend}/call`, {
         phone_number: num,
         email: email.data.email,
+        roomCode,
       });
+      setRoomCode(roomCode);
       toast.success("Call connected");
       setCallStatus(true);
       toast.dismiss();

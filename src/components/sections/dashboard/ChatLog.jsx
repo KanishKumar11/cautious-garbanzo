@@ -24,7 +24,7 @@ const callLogs = [
   { user: "I am user", agent: "I am also agent lasr" },
 ];
 const ChatLog = () => {
-  const { callStatus } = useGlobalStore();
+  const { callStatus, roomCode } = useGlobalStore();
   console.log(callStatus);
   const [callLogs, setCallLogs] = useState([]);
   const messageRef = useRef(null);
@@ -35,7 +35,7 @@ const ChatLog = () => {
   console.log(SOCKET_URL);
   useEffect(() => {
     if (callStatus) {
-      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/96gjggj3/`);
+      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/${roomCode}/`);
       ws.onopen = () => {
         console.log("Connected to WebSocket");
         ws.send(JSON.stringify(mess)); // Send a message to the server

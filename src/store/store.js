@@ -13,6 +13,10 @@ const useGlobalStore = create((set) => ({
   setUser: (value) => set({ user: value }),
   userEmail: "",
   setUserEmail: (value) => set({ userEmail: value }),
+  roomCode: "",
+  setRoomCode: (value) => {
+    set({ roomCode: value });
+  },
 }));
 
 export default useGlobalStore;
