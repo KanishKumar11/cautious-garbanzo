@@ -38,20 +38,25 @@ const Dialer = () => {
     }
     const roomCode = generateRoomCode(16);
     try {
-      const email = await axios.get("/api/email");
-      const backend = process.env.NEXT_PUBLIC_API_URL;
-      console.log(backend);
-      console.log(email.data.email);
-      const response = await axios.post(`${backend}/call`, {
-        phone_number: num,
-        email: email.data.email,
-        roomCode,
-      });
-      setRoomCode(roomCode);
-      toast.success("Call connected");
-      setCallStatus(true);
-      toast.dismiss();
-      console.log(response);
+      if (num.length > 8) {
+        const email = await axios.get("/api/email");
+        const backend = process.env.NEXT_PUBLIC_API_URL;
+        console.log(backend);
+        console.log(email.data.email);
+        const response = await axios.post(`${backend}/call`, {
+          phone_number: num,
+          email: email.data.email,
+          roomCode,
+        });
+        setRoomCode(roomCode);
+        toast.success("Call connected");
+        setCallStatus(true);
+        toast.dismiss();
+        console.log(response);
+      } else {
+        toast.dismiss();
+        toast.error("Invalid phone number");
+      }
     } catch (err) {
       toast.dismiss();
       toast.error("Unable to make the call, Try again!");
@@ -84,7 +89,7 @@ const Dialer = () => {
       </Head>
       <h2 className="text-2xl font-bold text-center my-4">Dialer</h2>
       <div className="flex items-center gap-3">
-        <Input type="text" value={num} onChange={handleInputChange} />
+        <Input type="text" value={num} onChange={handleInputChange} min="7" />
         <div
           className="bg-zinc-800 h-full w-max p-2 cursor-pointer text-slate-100 rounded-xl"
           onClick={() => onSubmit()}
