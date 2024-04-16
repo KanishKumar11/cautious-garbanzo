@@ -12,7 +12,7 @@ import { MdCallEnd } from "react-icons/md";
 
 const Dialer = () => {
   // const [audio] = useState(new Audio(dialerSound));
-  const { setCallStatus } = useGlobalStore();
+  const { setCallStatus, callStatus } = useGlobalStore();
   const [num, setNum] = useState("");
 
   const handleInputChange = (e) => {
@@ -45,6 +45,24 @@ const Dialer = () => {
       console.log(err);
     }
   };
+  const handleCallEnd = async () => {
+    if (callStatus) {
+      try {
+        const backend = process.env.NEXT_PUBLIC_API_URL;
+        const response = await axios.get(`${backend}/end_call`);
+        toast.success("Call disconnected");
+        setCallStatus(false);
+        toast.dismiss();
+        console.log(response);
+      } catch (err) {
+        toast.dismiss();
+        toast.error("Unable to end the call, Try again!");
+        console.log(err);
+      }
+    } else {
+      toast.error("Call not connected");
+    }
+  };
 
   return (
     <div className="p-5 rounded-xl bg-zinc-100/80 backdrop-blur-3xl">
@@ -62,7 +80,7 @@ const Dialer = () => {
         </div>
         <div
           className=" w-max p-2 cursor-pointer text-slate-100 rounded-xl bg-red-500 px-3 font-bold"
-          // onClick={() => onSubmit()}
+          onClick={handleCallEnd}
         >
           <MdCallEnd />
         </div>
