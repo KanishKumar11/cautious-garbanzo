@@ -35,7 +35,9 @@ const ChatLog = () => {
   console.log(SOCKET_URL);
   useEffect(() => {
     if (callStatus) {
-      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/${roomCode}/`);
+      // const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/${roomCode}/`);
+      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/96gjggj3/`);
+
       ws.onopen = () => {
         console.log("Connected to WebSocket");
         ws.send(JSON.stringify(mess)); // Send a message to the server
