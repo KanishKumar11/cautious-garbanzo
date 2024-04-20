@@ -17,6 +17,14 @@ const useGlobalStore = create((set) => ({
   setRoomCode: (value) => {
     set({ roomCode: value });
   },
+  sessionKey: "",
+  setSessionKey: (value) => {
+    set({ sessionKey: value });
+  },
+  csrfToken: "",
+  setCsrfToken: (value) => {
+    set({ csrfToken: value });
+  },
 }));
 
 export default useGlobalStore;

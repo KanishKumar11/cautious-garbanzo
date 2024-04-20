@@ -12,7 +12,8 @@ import { MdCallEnd } from "react-icons/md";
 
 const Dialer = () => {
   // const [audio] = useState(new Audio(dialerSound));
-  const { setCallStatus, callStatus, setRoomCode } = useGlobalStore();
+  const { setCallStatus, callStatus, setRoomCode, csrfToken, sessionKey } =
+    useGlobalStore();
   const [num, setNum] = useState("");
 
   const handleInputChange = (e) => {
@@ -43,11 +44,20 @@ const Dialer = () => {
         const backend = process.env.NEXT_PUBLIC_API_URL;
         // console.log(backend);
         // console.log(email.data.email);
-        const response = await axios.post(`${backend}/call`, {
-          phone_number: num,
-          email: email.data.email,
-          roomCode,
-        });
+        const response = await axios.post(
+          `${backend}/call`,
+          {
+            phone_number: num,
+            email: email.data.email,
+            roomCode,
+          },
+          {
+            headers: {
+              "X-CSRFToken": csrfToken,
+              Cookie: `sessionid=${sessionKey}`,
+            },
+          }
+        );
         setRoomCode(roomCode);
         toast.success("Call connected");
         setCallStatus(true);

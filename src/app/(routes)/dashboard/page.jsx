@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,7 +36,8 @@ import Link from "next/link";
 import getEmail from "@/helpers/getEmail";
 
 const Page = () => {
-  const { user, setUser, userEmail, setUserEmail } = useGlobalStore();
+  const { user, setUser, userEmail, setUserEmail, setSessionKey } =
+    useGlobalStore();
 
   const [email, setEmail] = useState("");
 
@@ -91,6 +93,7 @@ const Page = () => {
         email: userEmail,
       });
       setUser(response.data.user);
+      setSessionKey(response.data.session_key);
 
       console.log(response);
     } catch (err) {

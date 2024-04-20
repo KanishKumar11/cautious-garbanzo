@@ -11,7 +11,7 @@ const ManualTest = () => {
   const [manualInput, setManualInput] = useState(false);
   const [manual_response, setManual_response] = useState("");
   const [run_instructions, setRun_instructions] = useState("");
-  const { botName } = useGlobalStore();
+  const { botName, sessionKey, csrfToken } = useGlobalStore();
   // console.log(manualInput);
   const PresetItem = [
     // {
@@ -73,10 +73,19 @@ const ManualTest = () => {
     toast.loading("Submiting");
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;
-      const response = axios.post(`${backend}/manual`, {
-        manual_response,
-        run_instructions,
-      });
+      const response = axios.post(
+        `${backend}/manual`,
+        {
+          manual_response,
+          run_instructions,
+        },
+        {
+          headers: {
+            "X-CSRFToken": csrfToken,
+            Cookie: `sessionid=${sessionKey}`,
+          },
+        }
+      );
       toast.dismiss();
       toast.success("Submit successful.");
       // console.log(response);

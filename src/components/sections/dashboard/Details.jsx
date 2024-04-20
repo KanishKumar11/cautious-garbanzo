@@ -21,6 +21,8 @@ import useGlobalStore from "@/store/store";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import Cookies from "js-cookie";
+
 const formSchema = z.object({
   // botName: z.string().min(2, {
   //   message: "Bot name must be at least 2 characters.",
@@ -36,6 +38,10 @@ const formSchema = z.object({
 });
 
 const Details = () => {
+  const { setBotName, sessionKey, setCsrfToken } = useGlobalStore();
+  const csrfToken = Cookies.get("csrftoken");
+  console.log(csrfToken);
+  setCsrfToken(csrfToken);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +52,6 @@ const Details = () => {
       service: "",
     },
   });
-  const { setBotName } = useGlobalStore();
 
   const onSubmit = async () => {
     toast.loading("Saving...");
@@ -67,6 +72,12 @@ const Details = () => {
           prompt: formData.prompt,
           service: formData.service,
           // email: email.data.email,
+        },
+        {
+          headers: {
+            "X-CSRFToken": csrfToken,
+            Cookie: `sessionid=${sessionKey}`,
+          },
         }
       );
       // console.log(formData);
