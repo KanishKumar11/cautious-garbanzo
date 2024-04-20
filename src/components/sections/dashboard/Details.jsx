@@ -87,7 +87,7 @@ const Details = () => {
       );
       // console.log(formData);
       setBotName(formData.botName);
-      // console.log(response);
+      console.log(response);
       toast.dismiss();
       toast.success("Details saved!.");
     } catch (error) {
