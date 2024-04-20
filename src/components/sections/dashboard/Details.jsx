@@ -38,7 +38,7 @@ const formSchema = z.object({
 });
 
 const Details = () => {
-  const { setBotName, sessionKey, setCsrfToken } = useGlobalStore();
+  const { setBotName, sessionKey, setCsrfToken, csrfToken } = useGlobalStore();
   // const csrfToken = Cookies.get("csrftoken");
   // setCsrfToken(csrfToken);
   const form = useForm({
