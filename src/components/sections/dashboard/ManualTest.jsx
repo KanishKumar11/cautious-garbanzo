@@ -12,7 +12,7 @@ const ManualTest = () => {
   const [manual_response, setManual_response] = useState("");
   const [run_instructions, setRun_instructions] = useState("");
   const { botName } = useGlobalStore();
-  console.log(manualInput);
+  // console.log(manualInput);
   const PresetItem = [
     // {
     //   name: "Dynamic Tags Test",
@@ -79,13 +79,13 @@ const ManualTest = () => {
       });
       toast.dismiss();
       toast.success("Submit successful.");
-      console.log(response);
+      // console.log(response);
     } catch (err) {
       toast.error(err);
     }
-    console.log(manual_response, run_instructions);
+    // console.log(manual_response, run_instructions);
   };
-  console.log(manualInput);
+  // console.log(manualInput);
   const handleInputChange = async () => {
     try {
       if (manualInput) {
@@ -100,8 +100,8 @@ const ManualTest = () => {
       const response = await axios.post(`${backend}/toggle`, {
         mode: !manualInput,
       });
-      console.log(manualInput);
-      console.log(response);
+      // console.log(manualInput);
+      // console.log(response);
       toast.dismiss();
       if (!manualInput) {
         toast.success("Manual mode ON");
@@ -109,7 +109,7 @@ const ManualTest = () => {
         toast.success("Manual mode OFF");
       }
     } catch (Err) {
-      console.log("Error");
+      // console.log("Error");
       toast.dismiss();
       toast.error("Unable to change mode");
       setManualInput(manualInput);

@@ -51,7 +51,7 @@ const Details = () => {
   const onSubmit = async () => {
     toast.loading("Saving...");
     const email = await axios.get("/api/email");
-    console.log(email);
+    // console.log(email);
     try {
       const formData = form.getValues();
       const backend = process.env.NEXT_PUBLIC_API_URL;
@@ -69,13 +69,13 @@ const Details = () => {
           // email: email.data.email,
         }
       );
-      console.log(formData);
+      // console.log(formData);
       setBotName(formData.botName);
-      console.log(response);
+      // console.log(response);
       toast.dismiss();
       toast.success("Details saved!.");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.dismiss();
       toast.error("Failed to Save details. Please try again.");
     }

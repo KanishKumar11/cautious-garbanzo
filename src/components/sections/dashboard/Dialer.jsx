@@ -41,8 +41,8 @@ const Dialer = () => {
       if (num.length > 8) {
         const email = await axios.get("/api/email");
         const backend = process.env.NEXT_PUBLIC_API_URL;
-        console.log(backend);
-        console.log(email.data.email);
+        // console.log(backend);
+        // console.log(email.data.email);
         const response = await axios.post(`${backend}/call`, {
           phone_number: num,
           email: email.data.email,
@@ -52,7 +52,7 @@ const Dialer = () => {
         toast.success("Call connected");
         setCallStatus(true);
         toast.dismiss();
-        console.log(response);
+        // console.log(response);
       } else {
         toast.dismiss();
         toast.error("Invalid phone number");
@@ -60,7 +60,7 @@ const Dialer = () => {
     } catch (err) {
       toast.dismiss();
       toast.error("Unable to make the call, Try again!");
-      console.log(err);
+      // console.log(err);
     }
   };
   const handleCallEnd = async () => {
@@ -71,11 +71,11 @@ const Dialer = () => {
         toast.success("Call disconnected");
         setCallStatus(false);
         toast.dismiss();
-        console.log(response);
+        // console.log(response);
       } catch (err) {
         toast.dismiss();
         toast.error("Unable to end the call, Try again!");
-        console.log(err);
+        // console.log(err);
       }
     } else {
       toast.error("Call not connected");

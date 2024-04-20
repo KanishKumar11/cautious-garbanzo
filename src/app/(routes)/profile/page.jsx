@@ -88,19 +88,19 @@ const Page = () => {
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;
       const email = await axios.get("/api/email");
-      console.log(email.data.email);
+      // console.log(email.data.email);
       const response = await axios.post(`${backend}/get_user_details`, {
         email: userEmail,
       });
       setUser(response.data.user);
 
-      console.log(response);
+      // console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    console.log(localStorage.getItem("userEmail"));
+    // console.log(localStorage.getItem("userEmail"));
     setUserEmail(localStorage.getItem("userEmail"));
     fetchUserDetails();
   }, []);
@@ -123,11 +123,11 @@ const Page = () => {
       });
 
       setIsLoading(false);
-      console.log(response);
+      // console.log(response);
       toast.dismiss();
       toast.success("Update successful.");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setIsLoading(false);
       toast.dismiss();
       toast.error("Failed to Update. Please try again.");
@@ -140,7 +140,7 @@ const Page = () => {
     try {
       const response = await axios.get("/api/logout");
       router.push("/");
-      console.log(response);
+      // console.log(response);
     } catch (err) {
       console.log(err);
     }

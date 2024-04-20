@@ -33,7 +33,7 @@ const FormSchema = z.object({
 
 const Page = () => {
   const { otp } = useGlobalStore();
-  console.log(otp);
+  // console.log(otp);
   const [data, setData] = useState(null);
   const router = useRouter();
   const form = useForm({
@@ -53,7 +53,7 @@ const Page = () => {
 
   const onSubmit = async () => {
     const formData = form.getValues();
-    console.log(formData.otp, typeof formData.otp);
+    // console.log(formData.otp, typeof formData.otp);
     try {
       if (otp != formData.otp) throw new Error("Invalid Otp");
       if (data) {
@@ -79,7 +79,7 @@ const Page = () => {
           email,
         });
         toast.success("Email verified successfully");
-        console.log(response);
+        // console.log(response);
         router.push("/dashboard");
       } else {
         toast.error("No form data found.");
@@ -88,7 +88,7 @@ const Page = () => {
       error?.response?.status == 500
         ? toast.error("User already exists please login")
         : toast.error("Invalid OTP!");
-      console.log(error);
+      // console.log(error);
     }
   };
   return (

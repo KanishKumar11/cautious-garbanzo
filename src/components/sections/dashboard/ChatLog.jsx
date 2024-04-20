@@ -25,28 +25,24 @@ const callLogs = [
 ];
 const ChatLog = () => {
   const { callStatus, roomCode } = useGlobalStore();
-  console.log(callStatus);
   const [callLogs, setCallLogs] = useState([]);
   const messageRef = useRef(null);
 
   const mess = { message: "Hello server!", sender: "Kanish Kumar" };
-  // const SOCKET_URL = "wss://outgoing-grizzly-in.ngrok-free.app/ws";
   const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
-  console.log(SOCKET_URL);
   useEffect(() => {
     if (callStatus) {
       const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/${roomCode}/`);
-      // const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/96gjggj3/`);
 
       ws.onopen = () => {
         console.log("Connected to WebSocket");
-        ws.send(JSON.stringify(mess)); // Send a message to the server
+        ws.send(JSON.stringify(mess));
       };
 
       ws.onmessage = (event) => {
-        console.log(JSON.parse(event.data));
+        // console.log(JSON.parse(event.data));
 
-        console.log(event);
+        // console.log(event);
         setCallLogs((prevLogs) => [...prevLogs, JSON.parse(event.data)]);
       };
       ws.onclose = () => {
@@ -62,9 +58,8 @@ const ChatLog = () => {
       };
     }
   }, [callStatus]);
-  console.log(callLogs);
+  // console.log(callLogs);
   useEffect(() => {
-    // Scroll to the latest message when callLogs changes
     if (messageRef.current) {
       messageRef.current.scrollIntoView({ behavior: "smooth" });
     }

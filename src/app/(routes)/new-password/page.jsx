@@ -61,12 +61,12 @@ const ResetPasswordPage = ({ searchParams }) => {
       );
       setIsLoading(false);
       toast.success("Password reset successful.");
-      console.log(response);
+      // console.log(response);
       router.push("/login");
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to reset password. Please try again.");
-      console.log(error);
+      // console.log(error);
     }
   };
   if (!Email()) {

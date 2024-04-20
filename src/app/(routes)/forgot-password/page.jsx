@@ -60,11 +60,11 @@ const ForgotPasswordPage = () => {
       setOtp(response.data.otp);
       toast.success("An email with otp to reset your password has been sent.");
       setIsEmailVerified(true);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to initiate password reset. Please try again.");
-      console.log(error);
+      // console.log(error);
     }
   };
   const handleVerify = async (e) => {
@@ -83,11 +83,11 @@ const ForgotPasswordPage = () => {
       toast.success("Email Verified");
       setIsEmailVerified(true);
       router.push(`/new-password?email=${encodeURIComponent(formData.email)}`);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to initiate password reset. Please try again.");
-      console.log(error);
+      // console.log(error);
     }
   };
 

@@ -55,13 +55,13 @@ const LoginPage = () => {
       localStorage.setItem("userEmail", formData.email);
 
       toast.success("Login successful.");
-      console.log(response);
-      console.log(response2);
+      // console.log(response);
+      // console.log(response2);
       router.push("/dashboard");
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to login. Please try again.");
-      console.log(error);
+      // console.log(error);
     }
   };
 

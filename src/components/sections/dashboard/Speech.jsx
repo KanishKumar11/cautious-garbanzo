@@ -34,8 +34,8 @@ const Speech = () => {
     try {
       const backend = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.post(`${backend}/pre-prompt`, { index });
-      console.log(response);
-      console.log(index);
+      // console.log(response);
+      // console.log(index);
     } catch (err) {
       toast.error(err);
     }

@@ -86,12 +86,12 @@ const Page = () => {
 
       setOtp(response.data.otp);
       setIsLoading(false);
-      console.log(response);
+      // console.log(response);
       toast.dismiss();
       toast.success("Registration successful. Please login.");
       router.push("/verifyemail");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setIsLoading(false);
       toast.dismiss();
       toast.error("Failed to register. Please try again.");
