@@ -50,13 +50,13 @@ const Dialer = () => {
             phone_number: num,
             email: email.data.email,
             roomCode,
-          },
-          {
-            headers: {
-              "X-CSRFToken": csrfToken,
-              Cookie: `sessionid=${sessionKey}`,
-            },
           }
+          // {
+          //   headers: {
+          //     "X-CSRFToken": csrfToken,
+          //     Cookie: `sessionid=${sessionKey}`,
+          //   },
+          // }
         );
         setRoomCode(roomCode);
         toast.success("Call connected");

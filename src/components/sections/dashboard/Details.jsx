@@ -77,13 +77,13 @@ const Details = () => {
           prompt: formData.prompt,
           service: formData.service,
           // email: email.data.email,
-        },
-        {
-          headers: {
-            "X-CSRFToken": csrfToken,
-            Cookie: `sessionid=${sessionKey}`,
-          },
         }
+        // {
+        //   headers: {
+        //     "X-CSRFToken": csrfToken,
+        //     Cookie: `sessionid=${sessionKey}`,
+        //   },
+        // }
       );
       // console.log(formData);
       setBotName(formData.botName);

@@ -78,13 +78,13 @@ const ManualTest = () => {
         {
           manual_response,
           run_instructions,
-        },
-        {
-          headers: {
-            "X-CSRFToken": csrfToken,
-            Cookie: `sessionid=${sessionKey}`,
-          },
         }
+        // {
+        //   headers: {
+        //     "X-CSRFToken": csrfToken,
+        //     Cookie: `sessionid=${sessionKey}`,
+        //   },
+        // }
       );
       toast.dismiss();
       toast.success("Submit successful.");
