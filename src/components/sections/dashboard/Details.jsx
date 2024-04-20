@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -39,9 +39,8 @@ const formSchema = z.object({
 
 const Details = () => {
   const { setBotName, sessionKey, setCsrfToken } = useGlobalStore();
-  const csrfToken = Cookies.get("csrftoken");
-  console.log(csrfToken);
-  setCsrfToken(csrfToken);
+  // const csrfToken = Cookies.get("csrftoken");
+  // setCsrfToken(csrfToken);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +51,12 @@ const Details = () => {
       service: "",
     },
   });
+  useEffect(() => {
+    const csrfToken = Cookies.get("csrftoken");
+    setCsrfToken(csrfToken);
+
+    console.log(csrfToken);
+  }, []);
 
   const onSubmit = async () => {
     toast.loading("Saving...");

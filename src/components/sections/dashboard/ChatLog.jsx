@@ -32,7 +32,8 @@ const ChatLog = () => {
   const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
   useEffect(() => {
     if (callStatus) {
-      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/${roomCode}/`);
+      // const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/${roomCode}/`);
+      const ws = new WebSocket(`${SOCKET_URL}/ws/chatroom/96gjggj3/`);
 
       ws.onopen = () => {
         console.log("Connected to WebSocket");
